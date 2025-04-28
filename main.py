@@ -1,11 +1,10 @@
-from djitellopy import Tello
-tello = Tello()
+from djitellopy import Tello, TelloSwarm
+import time
+
+tello = Tello() # regular
 
 tello.connect()
 
-def main():
-    print("Hello World!")
-
-
-if __name__ == "__main__":
-    main()
+tello.takeoff()
+time.sleep(5)
+tello.land()
