@@ -42,7 +42,7 @@ def main(stdscr):
             break  # Exit after selecting
 
         # Add a small delay for smooth navigation
-        curses.napms(100)
+        curses.napms(100) # wtf does this even do
 
 if __name__ == "__main__":
     curses.wrapper(main)
