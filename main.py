@@ -1,33 +1,48 @@
-from djitellopy import Tello
-import time
+import curses
 
-tello = Tello() # regular
+from objectives.path import run_path
+from objectives.swarm import run_swarm
 
-tello.connect()
 
-# battery = tello.get_battery()
-# print(f"{battery}%")
+def swarm(): # Swarm function
+    run_path()
 
-# 1st
-tello.takeoff()
-tello.move_up(75)
-tello.move_forward(65)
+def path(): # Path function
+    run_swarm()
 
-# 2nd
-tello.move_up(50)
-tello.move_forward(50)
-tello.rotate_clockwise(90)
-tello.move_down(50)
+def show_menu(stdscr, selected_idx):
+    stdscr.clear()
+    menu = ["Swarm", "Path"]
+    for idx, item in enumerate(menu):
+        if idx == selected_idx:
+            stdscr.addstr(idx, 0, f"> {item}", curses.A_REVERSE)  # Highlight selected item
+        else:
+            stdscr.addstr(idx, 0, f"  {item}")
+    
+    stdscr.refresh()
 
-#3rd
-tello.move_forward(100)
-tello.rotate_counter_clockwise(90)
-tello.move_up(50)
+def main(stdscr):
+    curses.curs_set(0)  # Hide cursor
+    stdscr.nodelay(1)   # Non-blocking input
+    selected_idx = 0
 
-#4th
-tello.move_forward(50)
-tello.flip(2)
-time.sleep(5)
-tello.land()
+    while True:
+        show_menu(stdscr, selected_idx)
+        key = stdscr.getch()
 
-tello.end()
+        if key == curses.KEY_DOWN:
+            selected_idx = (selected_idx + 1) % 2  # Wrap around to the first option
+        elif key == curses.KEY_UP:
+            selected_idx = (selected_idx - 1) % 2  # Wrap around to the last option
+        elif key == 10:  # Enter key
+            if selected_idx == 0:
+                swarm()
+            elif selected_idx == 1:
+                path()
+            break  # Exit after selecting
+
+        # Add a small delay for smooth navigation
+        curses.napms(100)
+
+if __name__ == "__main__":
+    curses.wrapper(main)
