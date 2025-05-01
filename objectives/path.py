@@ -28,7 +28,7 @@ def run_path():
 
         #4th
         tello.move_forward(50)
-        tello.flip(2)
+        tello.flip_forward()
         time.sleep(5)
         tello.land()
     except Exception as e:

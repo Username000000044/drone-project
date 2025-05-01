@@ -5,10 +5,10 @@ from objectives.swarm import run_swarm
 
 
 def swarm(): # Swarm function
-    run_path()
+    run_swarm()
 
 def path(): # Path function
-    run_swarm()
+    run_path()
 
 def show_menu(stdscr, selected_idx):
     stdscr.clear()
