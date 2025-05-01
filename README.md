@@ -1,15 +1,16 @@
-**Clone Repository:**\n
-git clone https://github.com/Username000000044/drone-project.git\n
-cd drone-project\n
+**Clone Repository:**
+```git clone https://github.com/Username000000044/drone-project.git
+cd drone-project
 
-pip install -r requirements.txt\n
+pip install -r requirements.txt````
 
-**Publish to Github:**\n
-git status\n
-git add .\n
-git commit -m "Describe your changes here"\n
-git push origin main\n
+**Publish to Github:**
+```git status
+git add .
+git commit -m "Describe your changes here"
+git push origin main```
 
-**Adding Package:**\n
-pip install package\n
-pip freeze > requirements.txt\n
+**Adding Package:**
+```pip install package
+pip freeze > requirements.txt```
+
