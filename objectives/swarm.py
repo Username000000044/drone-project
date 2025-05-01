@@ -17,7 +17,7 @@ def mission(drone, idx): # (a single tello drone object, the index number of the
         drone.end()
 
 def run_swarm():
-    DRONE_IPS = ["IP", "IP"] # Add IPs Here!!
+    DRONE_IPS = [] # Add IPs in array.
 
     swarm = TelloSwarm.fromIps(DRONE_IPS)
 
