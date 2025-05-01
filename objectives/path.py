@@ -31,8 +31,6 @@ def run_path():
         tello.flip(2)
         time.sleep(5)
         tello.land()
-
-        tello.end()
     except Exception as e:
         print(f"Error: {e}")
 
