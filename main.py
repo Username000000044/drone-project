@@ -1,7 +1,7 @@
 import curses
 
-from objectives.path import run_path
-from objectives.swarm import run_swarm
+from fl.path import run_path
+from flights.swarm import run_swarm
 
 
 def swarm(): # Swarm function
