@@ -1,43 +1,39 @@
+#workdamnit
 from djitellopy import Tello
-import time
 import cv2
+import time
 import threading
-import sys
-import os
-import logging
 
-
-
-tello = Tello() #imports tello and is where I will define everything for now
-print("connecting to drone")
+tello = Tello()
 tello.connect()
-battery = tello.get_battery()
-print("Tello Connected")
-print(f"Battery percentage {battery}")
-#connects to tello and displays the battery
-
-
-
-def video_stream():
-    while True:
-        frame = tello.get_frame_read().frame 
-        frame = cv2.resize(frame, (1920, 1080))
-        cv2.imshow("tello video stream", frame)
-        if cv2.waitkey(1) & 0xFF == ord('q'):
-            break
-    cv2.destroyAllWindows()
-
 tello.streamon()
 
-tello.get_frame_read()
+battery_level = tello.get_battery()
+
+print(f"Battery level: {battery_level}%")
 
 
+frame_read = tello.get_frame_read()
 
-tello.streamoff()
+def show_video():
+    while True:
+        frame = frame_read.frame
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        cv2.imshow("Tello Camera", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
+video_thread = threading.Thread(target= show_video)
+
+video_thread.start()
+time.sleep(2)
 
 tello.takeoff()
-time.sleep(5)
+time.sleep(3)
 
-time.sleep(5)
 tello.land()
+time.sleep(2)
+
+video_thread.join()
+tello.streamoff()
+cv2.destroyAllWindows()
