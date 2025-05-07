@@ -3,11 +3,11 @@ import cv2 as cv
 import numpy as np
 
 class HoopDetection(Process):
-    def __init__(self, frame_queue, result_queue, color_ranges, sequence):
+    def __init__(self, frame_queue, product_queue, color_ranges, sequence):
         super().__init__() # allows me to use functions from Process parent class
 
         self.frame_queue = frame_queue
-        self.result_queue = result_queue
+        self.product_queue = product_queue
         self.color_ranges = color_ranges
         self.sequence = sequence
 
@@ -76,6 +76,6 @@ class HoopDetection(Process):
             if self.cooldown_counter <= 0:
                 self.recently_seen_hoop = False
 
-        self.result_queue.put((center, radius if hoop_found else None))
+        self.product_queue.put((center, radius if hoop_found else None))
 
         

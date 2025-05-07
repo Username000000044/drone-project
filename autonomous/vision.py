@@ -12,12 +12,11 @@ multiprocessing.Queue for sending drone camera's frames from the main thread for
 
 from djitellopy import Tello
 from video_thread import VideoStream
-from hoop_detection import HoopDetectorProcess
+from hoop_detection import HoopDetection
 from color_config import color_ranges, hoops_sequence
  
 import multiprocessing
 import cv2 as cv
-import queue
 
 def main():
     tello = Tello()
@@ -33,11 +32,11 @@ def main():
     video_stream = VideoStream(tello)
 
     # Queues
-    frame_queue = queue.Queue(maxsize=5)
+    frame_queue = multiprocessing.Queue(maxsize=5)
     product_queue = multiprocessing.Queue()
 
     # Start multiprocessing hoop detector
-    detector = HoopDetectorProcess(
+    detector = HoopDetection(
         frame_queue=frame_queue,
         product_queue=product_queue,
         color_ranges=color_ranges,
@@ -64,7 +63,7 @@ def main():
                 else:
                     print(f"🔍 No hoop detected.")
 
-            cv.imshow("Drone Feed", frame)
+                cv.imshow("Drone Feed", frame)
             if cv.waitKey(1) & 0xFF == ord('q'):
                 break
 
@@ -85,4 +84,5 @@ def main():
         cv.destroyAllWindows()
     
 if __name__ == "__main__":
+    multiprocessing.set_start_method('spawn') # For window support
     main()

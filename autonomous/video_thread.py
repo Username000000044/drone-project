@@ -9,14 +9,14 @@ class VideoStream:
         self.is_running = True
 
         self.thread = threading.Thread(target=self.update, daemon=True)
-        self.thread.start()
+        self.thread.start() 
         
     
     def get_frame(self):
         return self.frame
     
     def update(self):
-        while self.running:
+        while self.is_running:
             try:
                 self.frame = self.tello.get_frame_read().frame
             except Exception as e:
