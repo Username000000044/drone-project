@@ -1,0 +1,13 @@
+{
+  "video_settings": {
+    "width": 960,
+    "height": 720,
+
+    "frame_skip_interval": 3 // Process every 3rd frame (adjust as needed)
+  },
+  "drone_settings": {
+    "center_threshold": 40,
+    "forward_distance": 80,
+    "alignment_speed": 20
+  }
+}
