@@ -13,26 +13,35 @@ def run_path():
         # 1st
         tello.takeoff()
         tello.move_up(75)
-        tello.move_forward(55)
-
+        time.sleep(2)
+        tello.move_forward(80)
+        time.sleep(2)
+        
         # 2nd
         tello.move_up(50)
-        tello.move_forward(50)
+        time.sleep(2)
+        tello.move_forward(100)
         tello.rotate_clockwise(90)
         tello.move_down(50)
 
         #3rd
-        tello.move_forward(138)
+        tello.move_forward(145)
         tello.rotate_counter_clockwise(90)
-        tello.move_up(50)
+        tello.move_up(51)
 
         #4th
-        tello.move_forward(65)
+        tello.move_forward(85)
 
         #5th
-        tello.rotate_counter_clockwise(27)
-        tello.move_down(50)
-        tello.move_forward(275)
+        tello.rotate_counter_clockwise(40)
+        tello.move_down(40)
+        tello.move_forward(290)
+        
+        #6th
+        tello.rotate_clockwise(20)
+        tello.move_up(50)
+        tello.move_forward(67)
+        tello.rotate_clockwise(90)
         tello.flip_forward()
         time.sleep(5)
         tello.land()
